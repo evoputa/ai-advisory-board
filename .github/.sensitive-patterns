@@ -1,0 +1,101 @@
+# ============================================================
+# BF GIT GUARDIAN - Sensitive Data Patterns
+# AI Advisory Board Project
+# ============================================================
+# Pre-commit hook scans all staged files against these.
+#
+# Format:
+#   BLOCK: <regex>    - Blocks the commit (default)
+#   WARN:  <regex>    - Warns but allows the commit
+#
+# Patterns use grep -E (extended regex) syntax.
+# Lines starting with # are comments.
+#
+# Powered by BF Git Guardian
+# https://github.com/evoputa/bf-git-guardian
+# ============================================================
+
+
+# =====================
+# PERSONAL PATHS
+# =====================
+
+# Windows user directories
+BLOCK: C:\\Users\\[a-zA-Z]+\\(OneDrive|Desktop|Documents|Downloads|AppData)
+
+# Mac user directories
+BLOCK: /Users/[a-zA-Z]+/(OneDrive|Desktop|Documents|Downloads|Library)
+
+# Linux home directories
+BLOCK: /home/[a-zA-Z]+/(OneDrive|Desktop|Documents|Downloads)
+
+
+# =====================
+# API KEYS & TOKENS
+# =====================
+
+# OpenAI
+BLOCK: sk-[a-zA-Z0-9]{20,}
+
+# GitHub Personal Access Token
+BLOCK: ghp_[a-zA-Z0-9]{36}
+BLOCK: gho_[a-zA-Z0-9]{36}
+BLOCK: ghu_[a-zA-Z0-9]{36}
+BLOCK: ghs_[a-zA-Z0-9]{36}
+
+# AWS
+BLOCK: AKIA[0-9A-Z]{16}
+BLOCK: aws[_-]?secret[_-]?access[_-]?key
+
+# Slack
+BLOCK: xox[bpoas]-[a-zA-Z0-9-]{10,}
+
+# Stripe
+BLOCK: sk_live_[a-zA-Z0-9]{20,}
+BLOCK: rk_live_[a-zA-Z0-9]{20,}
+
+# Anthropic / Claude
+BLOCK: sk-ant-[a-zA-Z0-9]{20,}
+
+# Generic API key/secret/token assignments
+BLOCK: (api[_-]?key|api[_-]?secret|access[_-]?token|auth[_-]?token)\s*[:=]\s*["'][a-zA-Z0-9]{16,}
+
+
+# =====================
+# PASSWORDS & SECRETS
+# =====================
+
+# Password assignments
+BLOCK: (password|passwd|pwd)\s*[:=]\s*["'][^"']{4,}
+
+# Private keys
+BLOCK: -----BEGIN (RSA |EC |DSA |OPENSSH )?PRIVATE KEY-----
+
+# Database connection strings with credentials
+BLOCK: (mongodb|postgres|mysql|redis|amqp)://[a-zA-Z0-9]+:[a-zA-Z0-9]+@
+
+
+# =====================
+# PROJECT-SPECIFIC
+# =====================
+
+# Block real company data from user profiles leaking in
+# (company-profile.md is .gitignored, but catch content that migrates)
+BLOCK: revenue[_\s]*[:=]\s*\$[0-9]
+BLOCK: annual[_\s]*revenue
+
+# Block personal email addresses
+BLOCK: [a-zA-Z0-9._%+-]+@gmail\.com
+BLOCK: [a-zA-Z0-9._%+-]+@outlook\.com
+BLOCK: [a-zA-Z0-9._%+-]+@hotmail\.com
+BLOCK: [a-zA-Z0-9._%+-]+@yahoo\.com
+
+
+# =====================
+# WARNINGS (non-blocking)
+# =====================
+
+WARN: TODO.*(password|secret|token|key|cred)
+WARN: FIXME.*(password|secret|token|key|cred)
+WARN: HACK
+WARN: hardcoded

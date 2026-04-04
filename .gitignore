@@ -1,0 +1,28 @@
+# ========================
+# AI Advisory Board
+# ========================
+
+# User-specific company profile (may contain real business data)
+config/company-profile.md
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Hook backups
+*.backup
+
+# Claude Code
+.claude/
