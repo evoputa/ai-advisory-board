@@ -91,31 +91,46 @@ This isn't a launch. It's a reveal of something that's been running on real deci
 
 ## Installation
 
-### Option 1: Full Board (Recommended)
+### Quick Install (Developers)
 
-Copy the entire repository into your Claude skills directory:
+One command. Clones directly into your Claude skills directory and tracks the repo for easy updates.
 
+**Mac / Linux:**
 ```bash
-git clone https://github.com/evoputa/ai-advisory-board.git
-cp -r ai-advisory-board ~/.claude/skills/ai-advisory-board
+git clone https://github.com/evoputa/ai-advisory-board.git ~/.claude/skills/ai-advisory-board
 ```
 
-This gives you the full board orchestrator plus all 18 domain panels.
+**Windows (PowerShell):**
+```powershell
+git clone https://github.com/evoputa/ai-advisory-board.git $env:USERPROFILE\.claude\skills\ai-advisory-board
+```
 
-### Option 2: Individual Domain
+Restart Claude Desktop. Done.
 
-Only want one domain? Copy just that domain's folder:
+### Updating
+
+Because the skill is a live git clone, updates are one command:
+
+```bash
+cd ~/.claude/skills/ai-advisory-board && git pull
+```
+
+New advisors, refined prompts, and fixes land instantly. Click **Watch** on this repo and select **Releases** to get notified when there's something worth pulling.
+
+### Non-Technical Install (No Git Required)
+
+Never touched a terminal? No problem. See **[INSTALL-EASY.md](INSTALL-EASY.md)** for a step-by-step ZIP download walkthrough. No GitHub account, no command line, just download and drag.
+
+Tradeoff: ZIP users won't get automatic updates. To stay current, they need to re-download manually when new versions ship.
+
+### Individual Domains
+
+Only want one domain panel? Each domain folder under `domains/` is self-contained with its own SKILL.md and persona references. Copy just the folder you want:
 
 ```bash
 # Example: just the Finance & Accounting panel
-cp -r ai-advisory-board/domains/finance-accounting ~/.claude/skills/advisory-finance
+cp -r ~/.claude/skills/ai-advisory-board/domains/finance-accounting ~/.claude/skills/advisory-finance
 ```
-
-Each domain is self-contained with its own SKILL.md and persona references.
-
-### Option 3: Custom Selection
-
-Pick the domains you want and copy them individually. Each works standalone.
 
 ---
 
